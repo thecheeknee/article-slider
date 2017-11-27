@@ -1,0 +1,248 @@
+<!DOCTYPE html>
+<html lang="en">
+	<head>
+		<meta charset="utf-8">
+		<meta http-equiv="X-UA-Compatible" content="IE=edge">
+		<meta name="viewport" content="width=device-width, initial-scale=1">
+		<title>Bootstrap 101 Template</title>
+		<!-- Latest compiled and minified CSS -->
+		<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous">
+		<!-- HTML5 shim and Respond.js for IE8 support of HTML5 elements and media queries -->
+		<!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
+		<!--[if lt IE 9]>
+		<script src="https://oss.maxcdn.com/html5shiv/3.7.3/html5shiv.min.js"></script>
+		<script src="https://oss.maxcdn.com/respond/1.4.2/respond.min.js"></script>
+		<![endif]-->
+        <style>
+            .max-width-780{max-width:780px;}
+            .slider_header_wrapper ul, .slider_content_wrapper ul, .slider_nav_wrapper ul{list-style: none; margin: 0; padding:0;}
+            .slider_wrapper{height:96vh; margin:2vh 0;}
+            .reduced{padding:0; margin:0;}
+            .reduced .slider_wrapper{height:100vh; margin:0;}
+            .slider_wrapper *{transition: 0.5s all ease-in-out; -moz-transition: 0.5s all ease-in-out; -webkit-transition: 0.5s all ease-in-out; padding:0; margin:0;}
+            .slider_header_wrapper, .slider_content_wrapper, .slider_title_wrapper, .slider_nav_wrapper{display: none; padding:1px 0 0 0; position: relative; width:100%;}
+            .slider_header_wrapper.active{height:10vh; display: block; padding: 10px 0;}
+            .slider_content_wrapper.active{height:70vh; display: block;}
+            .slider_content_wrapper.fullscreen{height:80vh; display: block;}
+            .slider_content_wrapper.fullscreen .return{display:block; opacity:1;}
+            .slider_content_wrapper .content_img_wrapper{height:70vh;}
+            .slider_content_wrapper .content_img_wrapper *{height:70vh;}
+            .slider_content_wrapper.fullscreen .content_img_wrapper{height:80vh;}           .slider_content_wrapper.fullscreen .content_img_wrapper *{height:80vh;}
+            .slider_title_wrapper{height:0; max-height: 0px; opacity: 0;}
+            .slider_title_wrapper.active{height: auto; max-height: none; opacity: 1; display: block; transition-delay: 1s;}
+            .slider_title_wrapper.active header{min-height:20vh;}
+            .slider_title_wrapper.active .subtitle{margin:0 10px 15px 10px !important; border-bottom: 1px solid #c1c1c1;}
+            .slider_title_wrapper.active .title *{margin:0 10px 10px 10px;}
+            .slider_title_wrapper.active h1 .label{padding:3px 15px !important; float: right; font-weight: normal;}
+            .slider_nav_wrapper.active{height:16vh; display: block; padding: 10px 0;}
+            
+            /*typography*/
+            h1{font-size: 16px; margin: 0; padding: 15px 0 !important; font-weight: bold;}
+            h1.flex{margin: 0 0 15px 0 !important;padding: 10px 0 0 0 !important;font-weight: bold;height: auto;clear: both;float: none;display: flex;}
+            h2{font-size:20px; font-weight: bold;}
+            h4{font-size:14px;}
+            h4 span{display: inline-block; padding:0 3px !important; border-left:2px solid #333; font-weight: bold;}
+            .skip_block{font-size: 20px; color:#333; text-decoration: none; text-align: right; padding-top:10px;}
+            .return{font-size: 20px; color:#fff !important; position: absolute; top:10px; left:10px; padding:10px; z-index: 50; text-decoration: none !important; display: none; opacity: 0;}
+            
+            
+            /*images*/
+            img.cover{width:100%; position: absolute;}
+            .banner{position: absolute; z-index: 0; width: 100%; top: 0px; background-size: cover !important; background-position: center center !important; border-radius: 10px; -moz-border-radius: 10px; -webkit-border-radius: 10px;}
+            
+            /*Li Styles*/
+            .slider_header_wrapper li{display:none;}
+            .slider_header_wrapper li.active{display:block;}
+            .slider_content_wrapper li{position: absolute;}
+            .slider_content_wrapper li{transform: scale(0.8); opacity: 0.3;}
+            .slider_content_wrapper li.active{opacity: 1; z-index: 10 !important; transform: scale(1) !important;}
+            .slider_content_wrapper li.active img.cover{ z-index: 20;}
+            .slider_content_wrapper li.next{transform: scale(0.9) !important;opacity: 0.5; right: 11% !important;}
+            .slider_content_wrapper li.swipeout{opacity:0; z-index: -1 !important; transform: scale(0.8); left:-100vh; right:unset;}
+            
+            .slider_nav_wrapper nav{padding-top:15px;}
+            .slider_nav_wrapper nav li{display:inline-block; padding:3px; opacity: 0.4;}
+            .slider_nav_wrapper nav li.active{opacity: 1;}
+            .slider_nav_wrapper nav li a{display: block;}
+            span.circle {display: block;border: 3px solid #333;padding: 4px;border-radius: 50%;}
+            
+            @media screen and (min-width:769px){
+                .slider_content_wrapper.active{margin:0 auto; max-width:100%;}
+                .slider_content_wrapper.active li{width:80%; transform: scale(0.7);}
+                .slider_content_wrapper.active li.left{right:0%;}
+                .slider_content_wrapper li.next
+                .slider_content_wrapper.fullscreen li.active{width:70%; height:80vh;}
+                .slider_content_wrapper.fullscreen li.active .banner{border-radius: 0px; -webkit-border-radius: 0px; -moz-border-radius: 0px;}
+                .slider_title_wrapper.active{position: absolute; top:0px; right:0px; width:30%; height: 80vh;}
+                .slider_title_wrapper.active header{position:absolute; bottom:0px; width: 100%;}
+                .slider_title_wrapper.active header h1{font-size: 30px;}
+            }
+            
+            @media screen and (max-width:768px){
+                .slider_content_wrapper.active{margin:0 auto; max-width:600px;}
+                .slider_content_wrapper.active li{width:60%;}
+                .slider_content_wrapper.active li.left{right:25%;}
+                .slider_content_wrapper.fullscreen li.active{width:100%; height:80vh;}
+                .slider_content_wrapper.fullscreen li.left{display:none;}
+                .slider_content_wrapper.fullscreen .banner{border-radius: 0px; -webkit-border-radius: 0px; -moz-border-radius: 0px;}
+                .slider_title_wrapper{height: auto;max-height: none;opacity: 1;position: absolute;bottom: 0px;background: #ffffff;z-index: 100;padding: 10px; min-height: 30vh;}
+            }
+            
+            @media screen and (max-width:600px){
+                .slider_content_wrapper.active li.active{left:0; right:unset;}
+                .slider_content_wrapper.active li{width:85%; height:70vh;}
+                .slider_content_wrapper.active li.left{z-index: 8; right:-5vw;}
+            }
+            @media screen and (max-height:500px){
+                h2{font-size: 18px;}
+                h4{font-size: 13px;}
+            }
+        </style>
+        <script src="https://use.fontawesome.com/5d41271c5c.js"></script>
+	</head>
+	<body>
+        <section id="slider">
+            <div class="container-fluid reduced">
+                <div class="slider_wrapper">
+                    <div class="slider_header_wrapper">
+                        <h2>Illustrations For You!</h2>
+                        <h4>From our best artists <span>2017</span></h4>
+                    </div>
+                    <div class="slider_content_wrapper fullscreen">
+                        <a class="return">
+                            <i class="fa fa-arrow-left" aria-hidden="true"></i> Return
+                        </a>
+                        <ul>
+                            <li class="active" data-id="1" data-text="This week's book collections" data-title="Illustrations For You!" data-subtitle="From our best artists" data-time="2017">
+                                <div class="content_img_wrapper">
+                                    <img src="img/1x1.png" class="cover">
+                                    <div class="hidden-xs hidden-sm banner" style="background: url(img/book-read-wood-old-reading-collection-495484-pxhere.com-large.jpg);">
+                                    </div>
+                                    <div class="visible-xs visible-sm banner" style="background: url(img/book-read-wood-old-reading-collection-495484-pxhere.com-small.jpg);">
+                                    </div>
+                                </div>
+                            </li>
+                            <li class="left" data-id="2" data-text="This week's art collections" data-title="Photographs For You!" data-subtitle="From NatGeo Magazine" data-time="2016">
+                                <div class="content_img_wrapper">
+                                    <img src="img/1x1.png" class="cover">
+                                    <div class="hidden-xs hidden-sm banner" style="background: url(img/read-wood-white-antique-flower-old-1402062-pxhere.com-large.jpg);">
+                                    </div>
+                                    <div class="visible-xs visible-sm banner" style="background: url(img/read-wood-white-antique-flower-old-1402062-pxhere.com-small.jpg);">
+                                    </div>
+                                </div>
+                            </li>
+                            <li class="left" data-id="3" data-text="This week's video collections" data-title="Videos For You!" data-subtitle="From our best artists" data-time="2017">
+                                <div class="content_img_wrapper">
+                                    <img src="img/1x1.png" class="cover">
+                                    <div class="hidden-xs hidden-sm banner" style="background: url(img/man-person-music-black-and-white-white-photography-1190701-pxhere.com-large.jpg);">
+                                    </div>
+                                    <div class="visible-xs visible-sm banner" style="background: url(img/man-person-music-black-and-white-white-photography-1190701-pxhere.com-small.jpg);">
+                                    </div>
+                                </div>
+                            </li>
+                        </ul>
+                    </div>
+                    <div class="slider_title_wrapper active">
+                        <article>
+                            <header>
+                                <div class="subtitle">
+                                    <h1 class="flex">
+                                        <span class="col-xs-8 col-md-12">This week's book collections</span>
+                                        <span class="hidden-sm hidden-xs clearfix">&nbsp;</span>
+                                        <span class="col-xs-4 visible-sm hidden-lg hidden-md">
+                                            <a href="#" class="label label-success">View</a>
+                                        </span> 
+                                    </h1>
+                                </div>
+                                <div class="title">
+                                    <h2>Illustrations For You!</h2>
+                                    <h4>From our best artists <span>2017</span></h4>
+                                </div>
+                            </header>
+                        </article>
+                    </div>
+                    <div class="slider_nav_wrapper">
+                        <div class="row max-width-700 center-block">
+                            <nav class="col-xs-6">
+                                <ul>
+                                    <li class="active"><a data-id="1" href="#"><span class="circle"></span></a></li>
+                                    <li><a data-id="2" href="#"><span class="circle"></span></a></li>
+                                    <li><a data-id="3" href="#"><span class="circle"></span></a></li>
+                                </ul>
+                            </nav>
+                            <a href="#" class="col-xs-6 skip_block">
+                                <i class="fa fa-arrow-right" aria-hidden="true"></i> Skip Directly
+                            </a>
+                        </div>
+
+                    </div>
+                </div>
+            </div>
+        </section>
+        <section id="article">
+        </section>
+		<!-- jQuery (necessary for Bootstrap's JavaScript plugins) -->
+		<script src="//ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
+		<!-- Include all compiled plugins (below), or include individual files as needed -->
+		<script src="//code.jquery.com/mobile/1.4.5/jquery.mobile-1.4.5.min.js"></script>
+		<script>
+            var prev, current, next;
+            function showarticle(){
+                $('.slider_header_wrapper').removeClass('active');
+                $('.slider_content_wrapper').removeClass('active').addClass('fullscreen');
+                $('.slider_nav_wrapper').removeClass('active');
+                $('#slider .container-fluid').addClass('reduced');
+                $('.slider_title_wrapper').addClass('active');
+            }
+            
+            function showslider(){
+                $('.slider_header_wrapper').addClass('active');
+                $('.slider_content_wrapper').addClass('active').removeClass('fullscreen');
+                $('.slider_nav_wrapper').addClass('active');
+                $('#slider .container-fluid').removeClass('reduced');
+                $('.slider_title_wrapper').removeClass('active');
+            }
+            
+            function swipeSliderLeft(){
+                if( !$('#slider .container-fluid').hasClass('reduced') && $('.slider_content_wrapper').find('li.left').length>0){
+                    $('.next').removeClass('next');
+                    $(current).removeClass('active').addClass('swipeout');
+                    $(next).removeClass('left').addClass('active');
+                }
+                bind();
+            }
+            
+            function swipeSliderRight(){
+                if( !$('#slider .container-fluid').hasClass('reduced') && $('.slider_content_wrapper').find('li.swipeout').length>0){
+                    $('.next').removeClass('next');
+                    $(current).removeClass('active').addClass('left');
+                    $(prev).removeClass('swipeout').addClass('active');
+                }
+                bind();
+            }
+            
+            function bind(){
+                $('li.active img.cover').on("click", function(){
+                    showarticle();
+                });
+                $('li.active img.cover').on( "swipeleft", swipeSliderLeft);
+                $('li.active img.cover').on( "swiperight", swipeSliderRight);
+                prev = $('.slider_content_wrapper li.active').prev();
+                current = $('.slider_content_wrapper li.active');
+                next = $('.slider_content_wrapper li.active').next();
+                next.addClass('next');
+                $('.slider_header_wrapper h2').text(current.attr('data-title'));
+                $('.slider_header_wrapper h2').text(current.attr('data-subtitle'));
+
+            }
+            
+			$(document).ready(function(){
+			    $('.return').click(function(){
+                    showslider(); 
+                });
+                bind();
+                prev = null;
+			})
+		</script>
+	</body>
+</html>
